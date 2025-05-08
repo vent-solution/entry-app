@@ -12,7 +12,7 @@ import { getUserLocation } from "./global/api";
 function App() {
   const dispatch = useDispatch<AppDispatch>();
 
-  // socket connection and subscription
+  // socket connection and subscriptio
   useEffect(() => {
     webSocketService.connect();
 
