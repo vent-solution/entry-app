@@ -111,9 +111,9 @@ const LoginForm: React.FC = () => {
         );
       } else {
         if (result.data.userRole === UserRoleEnum.landlord) {
-          window.location.href = `http://localhost:3002/${result.data.userId}`;
-        } else {
-          window.location.href = `http://localhost:3003/${result.data.userId}`;
+          window.location.href = `http://34.222.163.206/${result.data.userId}`;
+        } else if (result.data.userRole === UserRoleEnum.tenant) {
+          window.location.href = `http://35.164.219.96/${result.data.userId}`;
         }
       }
 
