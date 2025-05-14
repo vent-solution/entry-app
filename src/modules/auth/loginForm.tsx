@@ -111,9 +111,9 @@ const LoginForm: React.FC = () => {
         );
       } else {
         if (result.data.userRole === UserRoleEnum.landlord) {
-          window.location.href = `http://34.222.163.206/${result.data.userId}`;
+          window.location.href = `/landlord/${result.data.userId}`;
         } else if (result.data.userRole === UserRoleEnum.tenant) {
-          window.location.href = `http://35.165.18.241/${result.data.userId}`;
+          window.location.href = `/tenant/${result.data.userId}`;
         }
       }
 
@@ -147,7 +147,7 @@ const LoginForm: React.FC = () => {
         <div className="w-full flex justify-start items-end">
           <img
             className="w-20 h-20"
-            src="/images/logo-no-background.png"
+            src={`${process.env.REACT_APP_LOGO_IMAGE}/logo-no-background.png`}
             alt=""
           />
           <h1 className=" text-5xl font-extrabold">ENT</h1>
