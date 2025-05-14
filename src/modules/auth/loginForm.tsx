@@ -113,7 +113,7 @@ const LoginForm: React.FC = () => {
         if (result.data.userRole === UserRoleEnum.landlord) {
           window.location.href = `http://34.222.163.206/${result.data.userId}`;
         } else if (result.data.userRole === UserRoleEnum.tenant) {
-          window.location.href = `http://35.164.219.96/${result.data.userId}`;
+          window.location.href = `http://35.165.18.241/${result.data.userId}`;
         }
       }
 
