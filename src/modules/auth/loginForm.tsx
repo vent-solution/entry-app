@@ -8,7 +8,7 @@ import { AlertTypeEnum } from "../../global/enums/alertTypeEnum";
 import AlertMessage from "../../other/alertMessage";
 import isValidEmail from "../../global/validation/emailValidation";
 import isValidTelephone from "../../global/validation/telephoneValidation";
-import { fetchData, postData } from "../../global/api";
+import { postData } from "../../global/api";
 import axios from "axios";
 import checkRequiredFormFields from "../../global/validation/checkRequiredFormFields";
 import { useDispatch } from "react-redux";
@@ -56,7 +56,6 @@ const LoginForm: React.FC = () => {
       checkRequiredFormFields([userName, userPassword]);
       dispatch(
         setAlert({
-          ...alert,
           type: AlertTypeEnum.danger,
           message: "Please fill in all the required form fields marked by (*)",
           status: true,
@@ -111,9 +110,9 @@ const LoginForm: React.FC = () => {
         );
       } else {
         if (result.data.userRole === UserRoleEnum.landlord) {
-          window.location.href = `/landlord/${result.data.userId}`;
+          window.location.href = `http://54.245.213.15/landlord/${result.data.userId}`;
         } else if (result.data.userRole === UserRoleEnum.tenant) {
-          window.location.href = `/tenant/${result.data.userId}`;
+          window.location.href = `http://54.245.213.15/tenant/${result.data.userId}`;
         }
       }
 
