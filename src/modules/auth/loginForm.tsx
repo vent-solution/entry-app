@@ -169,13 +169,13 @@ const LoginForm: React.FC = () => {
           <>
             <div className="form-group py-2">
               <label htmlFor="userName" className="w-full text-white">
-                Email/Telephone <span className="text-red-500">*</span>
+                Email<span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 id="userName"
                 autoFocus
-                autoComplete="false"
+                autoComplete="off"
                 aria-label="User name"
                 placeholder="Email or Telephone*"
                 className="w-full outline-none rounded-lg py-1"
