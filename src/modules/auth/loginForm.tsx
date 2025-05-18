@@ -149,7 +149,7 @@ const LoginForm: React.FC = () => {
             src={`${process.env.REACT_APP_LOGO_IMAGE}/logo-no-background.png`}
             alt=""
           />
-          <h1 className=" text-5xl font-extrabold">ENTS</h1>
+          <h1 className=" text-5xl font-extrabold">ENTSd</h1>
         </div>
         <div className="text-gray-400 h-3/4 flex flex-wrap items-center justify-center w-full text-start py-20 text-3xl">
           <div className="h-fit capitalize font-extralight">
