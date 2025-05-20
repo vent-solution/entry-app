@@ -484,7 +484,7 @@ const SignUpForm = () => {
             </div>
 
             {/* Gender form field */}
-            <div className="form-group py-2 w-full lg:w-1/2 px-5">
+            <div className="form-group py-2 w-full lg:w-1/2 px-5 text-black">
               <label htmlFor="gender" className="w-full text-white">
                 Gender <span className="text-red-500">*</span>
               </label>
