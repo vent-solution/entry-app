@@ -447,7 +447,7 @@ const SignUpForm = () => {
                 id="userTelephone"
                 autoComplete="off"
                 placeholder="Telephone* Eg. +23578348990"
-                className="w-full outline-none rounded-lg"
+                className="w-full outline-none rounded-lg bg-gray-200"
                 value={user.userTelephone || ""}
                 onChange={(e) => {
                   handleChange(e);
@@ -491,6 +491,7 @@ const SignUpForm = () => {
               <select
                 name="gender"
                 id="gender"
+                className="w-full outline-none rounded-lg bg-gray-200"
                 onChange={(e) => {
                   handleChange(e);
                   markRequiredFormField(e.target);
