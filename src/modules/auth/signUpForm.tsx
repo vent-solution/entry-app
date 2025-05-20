@@ -484,14 +484,14 @@ const SignUpForm = () => {
             </div>
 
             {/* Gender form field */}
-            <div className="form-group py-2 w-full lg:w-1/2 px-5 text-black">
+            <div className="form-group py-2 w-full lg:w-1/2 px-5 ">
               <label htmlFor="gender" className="w-full text-white">
                 Gender <span className="text-red-500">*</span>
               </label>
               <select
                 name="gender"
                 id="gender"
-                className="w-full outline-none rounded-lg bg-gray-200"
+                className="w-full outline-none rounded-lg bg-gray-200 text-black"
                 onChange={(e) => {
                   handleChange(e);
                   markRequiredFormField(e.target);
