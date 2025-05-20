@@ -115,7 +115,9 @@ const SignUpForm = () => {
     user.gender === GenderEnum.male ||
     user.gender === GenderEnum.others;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { id, value } = e.target;
     setUser({ ...user, [id]: value });
     markRequiredFormField(e.target);
@@ -423,7 +425,7 @@ const SignUpForm = () => {
                 type="text"
                 id="userEmail"
                 autoComplete="off"
-                placeholder="Email*"
+                placeholder="Email* Eg. example@domain.com"
                 className="w-full outline-none rounded-lg bg-gray-200"
                 value={user.userEmail || ""}
                 onChange={(e) => {
@@ -439,17 +441,21 @@ const SignUpForm = () => {
               <label htmlFor="userTelephone" className="w-full text-white">
                 Telephone <span className="text-red-500">*</span>
               </label>
-              {/* <input
-            type="text"
-            id="userTelephone"
-            autoComplete="off"
-            placeholder="Telephone* +23578348990"
-            className="w-full outline-none rounded-lg"
-            value={user.userTelephone || ""}
-            onChange={handleChange}
-          /> */}
 
-              <PhoneInput
+              <input
+                type="text"
+                id="userTelephone"
+                autoComplete="off"
+                placeholder="Telephone* Eg. +23578348990"
+                className="w-full outline-none rounded-lg"
+                value={user.userTelephone || ""}
+                onChange={(e) => {
+                  handleChange(e);
+                  markRequiredFormField(e.target);
+                }}
+              />
+
+              {/* <PhoneInput
                 country={"us"}
                 value={user.userTelephone}
                 placeholder="Enter telephone 1"
@@ -470,7 +476,7 @@ const SignUpForm = () => {
                   display: "flex",
                   alignItems: "center", // To keep the phone number and country code in the same line
                 }}
-              />
+              /> */}
 
               <small className="w-full text-red-300">
                 Telephone number is required
@@ -482,7 +488,19 @@ const SignUpForm = () => {
               <label htmlFor="gender" className="w-full text-white">
                 Gender <span className="text-red-500">*</span>
               </label>
-              <input
+              <select
+                name="gender"
+                id="gender"
+                onChange={(e) => {
+                  handleChange(e);
+                  markRequiredFormField(e.target);
+                }}
+              >
+                {GenderValues.map((gender, index) => (
+                  <option key={index} value={gender} />
+                ))}
+              </select>
+              {/* <input
                 type="text"
                 id="gender"
                 list="genderList"
@@ -499,7 +517,7 @@ const SignUpForm = () => {
                 {GenderValues.map((gender, index) => (
                   <option key={index} value={gender} />
                 ))}
-              </datalist>
+              </datalist> */}
               <small className="w-full text-red-300">Gender is required.</small>
             </div>
 
