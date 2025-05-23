@@ -110,9 +110,9 @@ const LoginForm: React.FC = () => {
         );
       } else {
         if (result.data.userRole === UserRoleEnum.landlord) {
-          window.location.href = `http://54.245.213.15/landlord/${result.data.userId}`;
+          window.location.href = `http://44.234.247.214/landlord/${result.data.userId}`;
         } else if (result.data.userRole === UserRoleEnum.tenant) {
-          window.location.href = `http://54.245.213.15/tenant/${result.data.userId}`;
+          window.location.href = `http://44.234.247.214/tenant/${result.data.userId}`;
         }
       }
 
