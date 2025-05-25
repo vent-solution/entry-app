@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -8,6 +7,7 @@ import "./styles/main.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { fetchCurrencyExchange } from "./other/apis/CurrencyExchangeSlice";
 import { fetchAdminFinancialSettings } from "./modules/settings/SettingsSlice";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 store.dispatch(fetchCurrencyExchange());
 store.dispatch(fetchAdminFinancialSettings());
@@ -32,3 +32,4 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+serviceWorkerRegistration.register();
