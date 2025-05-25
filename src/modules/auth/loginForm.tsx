@@ -231,7 +231,7 @@ const LoginForm: React.FC = () => {
               {loading ? "Logging in..." : "Log In"}
             </button>
           )}
-          <p className="w-full pt-5 text-blue-100">
+          <p className="w-full  pt-5 text-blue-100">
             Have no account?{" "}
             <Link
               to="/sign-up"

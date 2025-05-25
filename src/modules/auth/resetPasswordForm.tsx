@@ -192,7 +192,7 @@ const ResetPasswordForm: React.FC<Props> = ({ setIsForgotPassword }) => {
         >
           Login Instead?
         </p>
-        <div className="form-group flex flex-wrap justify-center pt-10  text-gold">
+        <div className="form-group flex flex-wrap justify-center pt-5 lg:pt-10  text-gold">
           <button
             className="w-full bg-blue-600 p-3 text-lg text-white hover:bg-blue-400 active:scale-95"
             onClick={() => {
