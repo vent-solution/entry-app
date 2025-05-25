@@ -13,6 +13,7 @@ import {
 import AlertMessage from "../../other/alertMessage";
 
 import countryList from "../../global/data/countriesList.json";
+import checkRequiredFormFields from "../../global/validation/checkRequiredFormFields";
 
 interface Props {
   tenant: TenantCreationModel;
@@ -36,7 +37,56 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
 
   // save tenant details
   const handleSaveTenantDetails = async () => {
-    // check if all the required fiels are filled
+    const idType = document.getElementById("idType") as HTMLInputElement;
+    const NOKIdType = document.getElementById("nokIdType") as HTMLInputElement;
+    const nationalId = document.getElementById(
+      "nationalId"
+    ) as HTMLInputElement;
+    const NOKNationalId = document.getElementById(
+      "nokNationalId"
+    ) as HTMLInputElement;
+    const addressType = document.getElementById(
+      "addressType"
+    ) as HTMLInputElement;
+    const country = document.getElementById("country") as HTMLInputElement;
+    const city = document.getElementById("city") as HTMLInputElement;
+
+    const NOKtelephone = document.getElementById(
+      "userTelephone"
+    ) as HTMLInputElement;
+
+    const nokName = document.getElementById("fullName") as HTMLInputElement;
+
+    // check if all the required form fields are filled
+    if (
+      !tenant.idType ||
+      tenant.idType.trim().length < 1 ||
+      !tenant.nationalId ||
+      tenant.nationalId.trim().length < 1 ||
+      !tenant.nextOfKin?.addressType ||
+      tenant.nextOfKin.addressType.trim().length < 1 ||
+      !tenant.nextOfKin.address?.country ||
+      tenant.nextOfKin.address?.country.trim().length < 1 ||
+      !tenant.nextOfKin.address?.city ||
+      tenant.nextOfKin.address?.city.trim().length < 1 ||
+      !tenant.nextOfKin.nokTelephone ||
+      tenant.nextOfKin.nokTelephone.trim().length < 1 ||
+      !tenant.nextOfKin?.nokName ||
+      tenant.nextOfKin.nokName.trim().length < 1
+    ) {
+      checkRequiredFormFields([
+        idType,
+        nationalId,
+        addressType,
+        country,
+        city,
+        NOKtelephone,
+        NOKIdType,
+        NOKNationalId,
+        nokName,
+      ]);
+    }
+    // check if all required tenant data values are provided
     if (!canSaveTenant) {
       dispatch(
         setAlert({
@@ -51,6 +101,19 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
     try {
       const result = await postData("/addNewTenant", tenant);
 
+      // check if no result return from the backend api
+      if (!result) {
+        dispatch(
+          setAlert({
+            status: true,
+            type: AlertTypeEnum.danger,
+            message: "ERROR OCCURRED PLEASE TRY AGAIN LATER!",
+          })
+        );
+        return;
+      }
+
+      // check if the result returned is not a success message
       if (result.data.status && result.data.status !== "OK") {
         dispatch(
           setAlert({
@@ -108,7 +171,7 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
             className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400 py-2"
             onChange={handleChangeTextFieldValues}
           />
-          <small className="w-full"></small>
+          <small className="w-full text-red-200">ID number is required!</small>
         </div>
 
         {/* national ID type form input field */}
@@ -128,7 +191,7 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
               </option>
             ))}
           </select>
-          <small className="w-full"></small>
+          <small className="w-full text-red-200"> ID type is required!</small>
         </div>
 
         {/*next of kin details */}
@@ -151,7 +214,9 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
               }))
             }
           />
-          <small className="w-full"></small>
+          <small className="w-full text-red-200">
+            Next of kin's full name is required!
+          </small>
         </div>
 
         {/* next of kin email form input field */}
@@ -214,7 +279,9 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
               }))
             }
           />
-          <small className="w-full"></small>
+          <small className="w-full text-red-200">
+            Next of kin ID number is required!
+          </small>
         </div>
 
         {/* next of kin national ID type form input field */}
@@ -239,7 +306,9 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
               <option value={type.value}>{type.label}</option>
             ))}
           </select>
-          <small className="w-full"></small>
+          <small className="w-full text-red-200">
+            Next of kin ID type is required!
+          </small>
         </div>
 
         {/* tenant's next of kin address */}
@@ -266,7 +335,9 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
               <option value={type.value}>{type.label}</option>
             ))}
           </select>
-          <small className="w-full"></small>
+          <small className="w-full text-red-200">
+            Address type is required!
+          </small>
         </div>
 
         {/* next of kin country form input field */}
@@ -297,7 +368,7 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
               <option value={country.value}>{country.label}</option>
             ))}
           </select>
-          <small className="w-full"></small>
+          <small className="w-full text-red-200">Country is required!</small>
         </div>
 
         {/* next of kin state form input field */}
@@ -349,7 +420,9 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
               }))
             }
           />
-          <small className="w-full"></small>
+          <small className="w-full text-red-200">
+            City/Municipality/District is required!
+          </small>
         </div>
 
         {/* next of kin county form input field */}

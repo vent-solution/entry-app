@@ -13,6 +13,7 @@ import { LandlordCreationModel } from "./landlordModel";
 import AlertMessage from "../../other/alertMessage";
 
 import countryList from "../../global/data/countriesList.json";
+import checkRequiredFormFields from "../../global/validation/checkRequiredFormFields";
 
 interface Props {
   landlord: LandlordCreationModel;
@@ -41,7 +42,33 @@ const LandlordForm: React.FC<Props> = ({ landlord, setLandlord }) => {
 
   // save user details
   const handleSaveLandlord = async () => {
-    // check if all the required fiels are filled
+    const idType = document.getElementById("idType") as HTMLInputElement;
+    const nationalId = document.getElementById(
+      "nationalId"
+    ) as HTMLInputElement;
+    const addressType = document.getElementById(
+      "addressType"
+    ) as HTMLInputElement;
+    const country = document.getElementById("country") as HTMLInputElement;
+    const city = document.getElementById("city") as HTMLInputElement;
+
+    // check if all the required form fields are filled
+    if (
+      !landlord.idType ||
+      landlord.idType.trim().length < 1 ||
+      !landlord.nationalId ||
+      landlord.nationalId.trim().length < 1 ||
+      !landlord.addressType ||
+      landlord.addressType.trim().length < 1 ||
+      !landlord.address?.country ||
+      landlord.address?.country.trim().length < 1 ||
+      !landlord.address?.city ||
+      landlord.address?.city.trim().length < 1
+    ) {
+      checkRequiredFormFields([idType, nationalId, addressType, country, city]);
+    }
+
+    // check if required landlord data values are provided
     if (!canSaveLandlord) {
       dispatch(
         setAlert({
@@ -55,6 +82,18 @@ const LandlordForm: React.FC<Props> = ({ landlord, setLandlord }) => {
 
     try {
       const result = await postData("/saveLandlord", landlord);
+
+      if (!result) {
+        dispatch(
+          setAlert({
+            status: true,
+            type: AlertTypeEnum.danger,
+            message: "ERROR OCCURRED PLEASE TRY AGAIN LATER!",
+          })
+        );
+
+        return;
+      }
 
       if (result.data.status && result.data.status !== "OK") {
         dispatch(
