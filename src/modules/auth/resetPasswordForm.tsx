@@ -152,7 +152,7 @@ const ResetPasswordForm: React.FC<Props> = ({ setIsForgotPassword }) => {
               markRequiredFormField(e.target);
             }}
           />
-          <small className="w-full text-red-600">
+          <small className="w-full text-red-200">
             {" "}
             Email or telephone is required!
           </small>
@@ -175,7 +175,7 @@ const ResetPasswordForm: React.FC<Props> = ({ setIsForgotPassword }) => {
               markRequiredFormField(e.target);
             }}
           />
-          <small className="w-full text-red-600">
+          <small className="w-full text-red-200">
             {" "}
             New password is required!
           </small>
