@@ -290,7 +290,7 @@ const SignUpForm = () => {
   const userChoice = (
     <div className="text-gray-500 p-5 w-full">
       <div
-        className="py-10 border rounded-lg px-5 lg:hover:text-gray-400 cursor-pointer"
+        className="py-3 lg:py-10 border rounded-lg px-5 lg:hover:text-gray-400 cursor-pointer"
         onClick={() => {
           setISShowSignUpForm(true);
           setAccountType(UserRoleEnum.landlord);
@@ -303,7 +303,7 @@ const SignUpForm = () => {
         </h1>
       </div>
       <div
-        className="py-10 border rounded-lg mt-10 px-5 lg:hover:text-gray-400 cursor-pointer"
+        className="py-3 lg:py-10 border rounded-lg mt-10 px-5 lg:hover:text-gray-400 cursor-pointer"
         onClick={() => {
           setISShowSignUpForm(true);
           setAccountType(UserRoleEnum.tenant);
