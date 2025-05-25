@@ -297,7 +297,7 @@ const SignUpForm = () => {
           setUser((prev) => ({ ...prev, userRole: UserRoleEnum.landlord }));
         }}
       >
-        <h1 className="text-3xl flex justify-between">
+        <h1 className="text-xl lg:text-3xl flex justify-between">
           <span>Landlord account</span>
           <span>{">"}</span>
         </h1>
@@ -310,7 +310,7 @@ const SignUpForm = () => {
           setUser((prev) => ({ ...prev, userRole: UserRoleEnum.tenant }));
         }}
       >
-        <h1 className="text-3xl flex justify-between">
+        <h1 className="text-xl lg:text-3xl flex justify-between">
           <span>Tenant account</span>
           <span>{">"}</span>
         </h1>
