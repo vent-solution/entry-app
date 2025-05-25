@@ -221,13 +221,21 @@ const SignUpForm = () => {
       setLoading(true);
       const result = await postData("/sign-up", user);
 
+      if (!result) {
+        dispatch(
+          setAlert({
+            type: AlertTypeEnum.danger,
+            message: "ERROR OCCURRED PLEASE TRY AGAIN LATER.",
+            status: true,
+          })
+        );
+        return;
+      }
+
       if (result.data.status && result.data.status !== "OK") {
         dispatch(
           setAlert({
-            type:
-              result.data.status !== "OK"
-                ? AlertTypeEnum.danger
-                : AlertTypeEnum.success,
+            type: AlertTypeEnum.danger,
             message: result.data.message,
             status: true,
           })
