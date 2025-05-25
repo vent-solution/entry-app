@@ -146,7 +146,7 @@ const LoginForm: React.FC = () => {
       action=""
       onSubmit={(e: React.FormEvent) => e.preventDefault()}
     >
-      <div className="text-white w-full lg:w-1/3 p-3 lg:p-5  flex flex-wrap justify-center items-center">
+      <div className="text-white w-full lg:w-1/3 p-3 py-1 lg:p-5  flex flex-wrap justify-center items-center">
         <div className="w-full flex justify-start items-end">
           <img
             className="w-14 lg:w-20 h-14 lg:h-20"

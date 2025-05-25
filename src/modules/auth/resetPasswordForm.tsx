@@ -143,7 +143,6 @@ const ResetPasswordForm: React.FC<Props> = ({ setIsForgotPassword }) => {
           <input
             type="text"
             id="userName"
-            autoFocus
             autoComplete="false"
             value={user.userName}
             placeholder="Enter email or Telephone*"
