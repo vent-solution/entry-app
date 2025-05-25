@@ -372,7 +372,6 @@ const SignUpForm = () => {
                 type="text"
                 id="firstName"
                 autoComplete="off"
-                autoFocus
                 placeholder="First name*"
                 className="w-full outline-none rounded-lg border-2 bg-gray-200 py-2"
                 value={user.firstName || ""}
