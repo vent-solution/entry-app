@@ -344,8 +344,8 @@ const SignUpForm = () => {
         <h1 className="text-xs w-full text-start">&copy; vent solutions</h1>
       </div>
 
-      <div className="login-form-inner w-full lg:w-1/2 relative px-5 rounded-md  bg-blue-700 flex flex-wrap bg-opacity-10 shadow-sm pb-10">
-        <div className="w-full p-5 flex justify-center lg:sticky -top-32 bg-inherit">
+      <div className="h-fit lg:h-svh login-form-inner w-full lg:w-1/2 relative px-5 rounded-md  bg-blue-700 flex flex-wrap bg-opacity-10 shadow-sm pb-10">
+        <div className="w-full p-5 flex justify-center items-center lg:sticky -top-32 bg-inherit">
           <h1 className="text-white text-2xl border-b-2 border-b-white w-full">
             Create a vent account{" "}
             {user.userRole && <span>({user.userRole})</span>}
