@@ -16,7 +16,6 @@ import AlertMessage from "../../other/alertMessage";
 import { setAlert } from "../../other/alertSlice";
 import { UserModel } from "../users/models/userModel";
 import LandlordForm from "./LandlordForm";
-import PhoneInput from "react-phone-input-2";
 import { LandlordCreationModel } from "./landlordModel";
 import { SocketMessageModel } from "../../webSockets/SocketMessageModel";
 import { webSocketService } from "../../webSockets/socketService";
@@ -130,7 +129,9 @@ const SignUpForm = () => {
     const firstName = document.getElementById("firstName") as HTMLInputElement;
     const lastName = document.getElementById("lastName") as HTMLInputElement;
     const email = document.getElementById("userEmail") as HTMLInputElement;
-
+    const telephone = document.getElementById(
+      "userTelephone"
+    ) as HTMLInputElement;
     const gender = document.getElementById("gender") as HTMLInputElement;
     const password = document.getElementById(
       "userPassword"
@@ -155,7 +156,7 @@ const SignUpForm = () => {
         firstName,
         lastName,
         email,
-        // telephone,
+        telephone,
         gender,
         password,
       ]);
@@ -318,13 +319,13 @@ const SignUpForm = () => {
       <div className=" text-white w-full lg:w-1/3 p-3 lg:p-5  flex flex-wrap justify-center items-center lg:h-svh lg:sticky top-0 lg:py-32">
         <div className="w-full flex justify-start items-end">
           <img
-            className="w-20 h-20"
+            className="w-14 lg:w-20 h-14 lg:h-20"
             src="/images/logo-no-background.png"
             alt=""
           />
-          <h1 className=" text-5xl font-extrabold">ENT</h1>
+          <h1 className="text-3xl lg:text-5xl font-extrabold">ENT</h1>
         </div>
-        <div className="text-gray-400 h-3/4 flex flex-wrap items-center justify-center w-full text-start py-20 text-3xl">
+        <div className="text-gray-400 h-3/4 flex flex-wrap items-center justify-center w-full text-start py-20 text-xl lg:text-3xl">
           <div className="h-fit capitalize font-extralight">
             <p className="w-full">welcome to vent.</p>
             <p className="w-full">
@@ -342,7 +343,6 @@ const SignUpForm = () => {
             {user.userRole && <span>({user.userRole})</span>}
           </h1>
         </div>
-
         {!isShowSignUpForm ? (
           userChoice
         ) : isShowTenantDetailsForm ? (
@@ -366,7 +366,7 @@ const SignUpForm = () => {
                 autoComplete="off"
                 autoFocus
                 placeholder="First name*"
-                className="w-full outline-none rounded-lg border-2 bg-gray-200"
+                className="w-full outline-none rounded-lg border-2 bg-gray-200 py-2"
                 value={user.firstName || ""}
                 onChange={(e) => {
                   handleChange(e);
@@ -388,7 +388,7 @@ const SignUpForm = () => {
                 id="lastName"
                 autoComplete="off"
                 placeholder="Last name*"
-                className="w-full outline-none rounded-lg bg-gray-200"
+                className="w-full outline-none rounded-lg bg-gray-200 py-2"
                 value={user.lastName || ""}
                 onChange={(e) => {
                   handleChange(e);
@@ -410,7 +410,7 @@ const SignUpForm = () => {
                 id="otherNames"
                 autoComplete="off"
                 placeholder="Other names"
-                className="w-full outline-none rounded-lg bg-gray-200"
+                className="w-full outline-none rounded-lg bg-gray-200 py-2"
                 value={user.otherNames || ""}
                 onChange={handleChange}
               />
@@ -426,7 +426,7 @@ const SignUpForm = () => {
                 id="userEmail"
                 autoComplete="off"
                 placeholder="Email* Eg. example@domain.com"
-                className="w-full outline-none rounded-lg bg-gray-200"
+                className="w-full outline-none rounded-lg bg-gray-200 py-2"
                 value={user.userEmail || ""}
                 onChange={(e) => {
                   handleChange(e);
@@ -447,7 +447,7 @@ const SignUpForm = () => {
                 id="userTelephone"
                 autoComplete="off"
                 placeholder="Telephone* Eg. +23578348990"
-                className="w-full outline-none rounded-lg bg-gray-200"
+                className="w-full outline-none rounded-lg bg-gray-200 py-2"
                 value={user.userTelephone || ""}
                 onChange={(e) => {
                   handleChange(e);
@@ -455,75 +455,37 @@ const SignUpForm = () => {
                 }}
               />
 
-              {/* <PhoneInput
-                country={"us"}
-                value={user.userTelephone}
-                placeholder="Enter telephone 1"
-                onChange={(phone) => {
-                  setUser({
-                    ...user,
-                    userTelephone: phone ? "+" + phone : null,
-                  });
-                }}
-                inputStyle={{
-                  width: "100%",
-                  padding: "10px 50px",
-                  fontSize: "16px",
-                  borderRadius: "4px",
-                }}
-                containerStyle={{
-                  width: "100%",
-                  display: "flex",
-                  alignItems: "center", // To keep the phone number and country code in the same line
-                }}
-              /> */}
-
               <small className="w-full text-red-300">
                 Telephone number is required
               </small>
             </div>
 
             {/* Gender form field */}
-            <div className="form-group py-2 w-full lg:w-1/2 px-5 ">
+            <div className="form-group py-2 w-full lg:w-1/2 px-5">
               <label htmlFor="gender" className="w-full text-white">
                 Gender <span className="text-red-500">*</span>
               </label>
               <select
                 name="gender"
                 id="gender"
-                className="w-full outline-none rounded-lg bg-gray-200 text-black"
+                className="w-full outline-none rounded-lg bg-gray-200 py-3"
                 onChange={(e) => {
                   handleChange(e);
                   markRequiredFormField(e.target);
                 }}
               >
+                <option value="">SELECT GENDER</option>
                 {GenderValues.map((gender, index) => (
-                  <option key={index} value={gender} />
+                  <option key={index} value={gender} className="capitalize">
+                    {gender}
+                  </option>
                 ))}
               </select>
-              {/* <input
-                type="text"
-                id="gender"
-                list="genderList"
-                autoComplete="off"
-                placeholder="Gender*"
-                className="w-full outline-none rounded-lg bg-gray-200"
-                value={user.gender || ""}
-                onChange={(e) => {
-                  handleChange(e);
-                  markRequiredFormField(e.target);
-                }}
-              />
-              <datalist id="genderList">
-                {GenderValues.map((gender, index) => (
-                  <option key={index} value={gender} />
-                ))}
-              </datalist> */}
               <small className="w-full text-red-300">Gender is required.</small>
             </div>
 
             {/* Password input field */}
-            <div className="form-group relative py-0 lg:py-2 w-full lg:w-1/2 pl-5">
+            <div className="relative form-group py-2 w-full lg:w-1/2 px-5 text-black">
               <label htmlFor="userPassword" className="w-full text-white">
                 Password <span className="text-red-500">*</span>
               </label>
@@ -532,7 +494,7 @@ const SignUpForm = () => {
                 id="userPassword"
                 autoComplete="off"
                 placeholder="Password*"
-                className="w-full outline-none rounded-lg bg-gray-200"
+                className="w-full outline-none rounded-lg bg-gray-200 py-2"
                 value={user.userPassword || ""}
                 onChange={(e) => {
                   handleChange(e);
@@ -543,7 +505,7 @@ const SignUpForm = () => {
                 Password is required.
               </small>
               <div
-                className="absolute right-0 top-10 text-blue-800 text-lg px-2 mr-2 cursor-pointer"
+                className="absolute right-0 top-9 lg:top-10 text-blue-800 lg:hover:text-blue-500 text-2xl lg:text-xl px-3 mr-3 cursor-pointer"
                 onClick={handleTogglePassword}
               >
                 {showPassword ? <FaEye /> : <FaEyeSlash />}

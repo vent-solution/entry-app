@@ -13,11 +13,12 @@ let AlertMessage: React.FC<Props> = () => {
 
   const alertData = useSelector(getAlert);
 
+  // manually close the alert by clicking the close alert button
   const closeAlert = () => {
     dispatch(setAlert({ message: "", type: "", status: false }));
   };
 
-  // close the alert after a specified period of time.
+  // automatically close the alert after a specified period of time.
   useEffect(() => {
     const timeOut = setTimeout(() => {
       dispatch(setAlert({ message: "", type: "", status: false }));

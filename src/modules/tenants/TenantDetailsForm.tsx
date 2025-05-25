@@ -10,8 +10,9 @@ import {
   ADDRESS_TYPE,
   NATIONAL_ID_TYPE,
 } from "../../global/PreDefinedData/PreDefinedData";
-import PhoneInput from "react-phone-input-2";
 import AlertMessage from "../../other/alertMessage";
+
+import countryList from "../../global/data/countriesList.json";
 
 interface Props {
   tenant: TenantCreationModel;
@@ -19,11 +20,7 @@ interface Props {
   setIsShowTenantDetailsForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TenantDetailsForm: React.FC<Props> = ({
-  tenant,
-  setTenant,
-  setIsShowTenantDetailsForm,
-}) => {
+const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   // check if can save tenant details
@@ -31,15 +28,7 @@ const TenantDetailsForm: React.FC<Props> = ({
 
   // handle change text field values
   const handleChangeTextFieldValues = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { id, value } = e.target;
-    setTenant((prev) => ({ ...prev, [id]: value }));
-  };
-
-  // handle change select field values
-  const handleChangeSelectFieldValues = (
-    e: React.ChangeEvent<HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { id, value } = e.target;
     setTenant((prev) => ({ ...prev, [id]: value }));
@@ -101,7 +90,7 @@ const TenantDetailsForm: React.FC<Props> = ({
             type="text"
             id="companyName"
             placeholder="Enter company name"
-            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400"
+            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400 py-2"
             onChange={handleChangeTextFieldValues}
           />
           <small className="w-full"></small>
@@ -116,7 +105,7 @@ const TenantDetailsForm: React.FC<Props> = ({
             type="text"
             id="nationalId"
             placeholder="Enter national ID number"
-            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400"
+            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400 py-2"
             onChange={handleChangeTextFieldValues}
           />
           <small className="w-full"></small>
@@ -129,8 +118,8 @@ const TenantDetailsForm: React.FC<Props> = ({
           </label>
           <select
             id="idType"
-            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400"
-            onChange={handleChangeSelectFieldValues}
+            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400 py-3"
+            onChange={handleChangeTextFieldValues}
           >
             <option value={""}>SELECT ID TYPE</option>
             {NATIONAL_ID_TYPE.map((type, index) => (
@@ -154,7 +143,7 @@ const TenantDetailsForm: React.FC<Props> = ({
             type="text"
             id="fullName"
             placeholder="Enter next of kin full name"
-            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400"
+            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400 py-2"
             onChange={(e) =>
               setTenant((prev) => ({
                 ...prev,
@@ -174,7 +163,7 @@ const TenantDetailsForm: React.FC<Props> = ({
             type="text"
             id="nokEmail"
             placeholder="Enter next of kin email"
-            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400"
+            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400 py-2"
             onChange={(e) =>
               setTenant((prev) => ({
                 ...prev,
@@ -186,36 +175,26 @@ const TenantDetailsForm: React.FC<Props> = ({
         </div>
 
         {/* next of kin telephone form input field */}
-        <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
-          <label htmlFor="nokTelephone" className="w-full font-bold">
-            Telephone <span className="text-red-600">*</span>
+        <div className="form-group py-2 w-full lg:w-1/2 px-5">
+          <label htmlFor="userTelephone" className="w-full text-white">
+            Telephone <span className="text-red-500">*</span>
           </label>
-          <PhoneInput
-            country={"us"}
-            value={tenant.nextOfKin?.nokTelephone}
-            placeholder="Enter telephone"
-            onChange={(phone) => {
-              setTenant({
-                ...tenant,
-                nextOfKin: {
-                  ...tenant.nextOfKin,
-                  nokTelephone: phone ? "+" + phone : "",
-                },
-              });
-            }}
-            inputStyle={{
-              width: "100%",
-              padding: "10px 50px",
-              fontSize: "16px",
-              borderRadius: "10px",
-            }}
-            containerStyle={{
-              width: "100%",
-              display: "flex flex-wrap",
-              alignItems: "center", // To keep the phone number and country code in the same line
+
+          <input
+            type="text"
+            id="userTelephone"
+            autoComplete="off"
+            placeholder="Telephone* Eg. +23578348990"
+            className="w-full outline-none rounded-lg bg-gray-100 py-2"
+            value={tenant.nextOfKin?.nokTelephone || ""}
+            onChange={(e) => {
+              handleChangeTextFieldValues(e);
             }}
           />
-          <small className="w-full"></small>
+
+          <small className="w-full text-red-300">
+            Telephone number is required
+          </small>
         </div>
 
         {/* next of kin ID form input field */}
@@ -227,7 +206,7 @@ const TenantDetailsForm: React.FC<Props> = ({
             type="text"
             id="nokNationalId"
             placeholder="Enter next of kin national ID"
-            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400"
+            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400 py-2"
             onChange={(e) =>
               setTenant((prev) => ({
                 ...prev,
@@ -246,7 +225,7 @@ const TenantDetailsForm: React.FC<Props> = ({
           </label>
           <select
             id="nokIdType"
-            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400"
+            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400 py-3"
             onChange={(e) =>
               setTenant((prev) => ({
                 ...prev,
@@ -273,7 +252,7 @@ const TenantDetailsForm: React.FC<Props> = ({
           </label>
           <select
             id="addressType"
-            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400"
+            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400 py-3"
             onChange={(e) =>
               setTenant((prev) => ({
                 ...prev,
@@ -295,11 +274,11 @@ const TenantDetailsForm: React.FC<Props> = ({
           <label htmlFor="country" className="w-full font-bold">
             Country <span className="text-red-600">*</span>
           </label>
-          <input
-            type="text"
+
+          <select
+            name="country"
             id="country"
-            placeholder="Enter next of kin country"
-            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400"
+            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400 py-3"
             onChange={(e) =>
               setTenant((prev) => ({
                 ...prev,
@@ -312,7 +291,12 @@ const TenantDetailsForm: React.FC<Props> = ({
                 },
               }))
             }
-          />
+          >
+            <option value="">SELECT COUNTRY</option>
+            {countryList.map((country) => (
+              <option value={country.value}>{country.label}</option>
+            ))}
+          </select>
           <small className="w-full"></small>
         </div>
 
@@ -325,7 +309,7 @@ const TenantDetailsForm: React.FC<Props> = ({
             type="text"
             id="state"
             placeholder="Enter next of kin state"
-            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400"
+            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400 py-2"
             onChange={(e) =>
               setTenant((prev) => ({
                 ...prev,
@@ -351,7 +335,7 @@ const TenantDetailsForm: React.FC<Props> = ({
             type="text"
             id="city"
             placeholder="Enter next of kin city"
-            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400"
+            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400 py-2"
             onChange={(e) =>
               setTenant((prev) => ({
                 ...prev,
@@ -377,7 +361,7 @@ const TenantDetailsForm: React.FC<Props> = ({
             type="text"
             id="county"
             placeholder="Enter next of kin county"
-            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400"
+            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400 py-2"
             onChange={(e) =>
               setTenant((prev) => ({
                 ...prev,
@@ -403,7 +387,7 @@ const TenantDetailsForm: React.FC<Props> = ({
             type="text"
             id="division"
             placeholder="Enter next of kin division"
-            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400"
+            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400 py-2"
             onChange={(e) =>
               setTenant((prev) => ({
                 ...prev,
@@ -429,7 +413,7 @@ const TenantDetailsForm: React.FC<Props> = ({
             type="text"
             id="parish"
             placeholder="Enter next of kin parish"
-            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400"
+            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400 py-2"
             onChange={(e) =>
               setTenant((prev) => ({
                 ...prev,
@@ -455,7 +439,7 @@ const TenantDetailsForm: React.FC<Props> = ({
             type="text"
             id="zone"
             placeholder="Enter next of kin zone"
-            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400"
+            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400 py-2"
             onChange={(e) =>
               setTenant((prev) => ({
                 ...prev,
@@ -481,7 +465,7 @@ const TenantDetailsForm: React.FC<Props> = ({
             type="text"
             id="street"
             placeholder="Enter next of kin street"
-            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400"
+            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400 py-2"
             onChange={(e) =>
               setTenant((prev) => ({
                 ...prev,
@@ -507,7 +491,7 @@ const TenantDetailsForm: React.FC<Props> = ({
             type="text"
             id="plotNumber"
             placeholder="Enter next of kin plotNumber"
-            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400"
+            className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400 py-2"
             onChange={(e) =>
               setTenant((prev) => ({
                 ...prev,

@@ -110,9 +110,13 @@ const LoginForm: React.FC = () => {
         );
       } else {
         if (result.data.userRole === UserRoleEnum.landlord) {
-          window.location.href = `http://44.234.247.214/landlord/${result.data.userId}`;
+          window.location.href = `${
+            process.env.REACT_APP_LANDLORD_APP_URL + result.data.userId
+          }`;
         } else if (result.data.userRole === UserRoleEnum.tenant) {
-          window.location.href = `http://44.234.247.214/tenant/${result.data.userId}`;
+          window.location.href = `${
+            process.env.REACT_APP_TENANT_APP_URL + result.data.userId
+          }`;
         }
       }
 
@@ -145,13 +149,13 @@ const LoginForm: React.FC = () => {
       <div className="text-white w-full lg:w-1/3 p-3 lg:p-5  flex flex-wrap justify-center items-center">
         <div className="w-full flex justify-start items-end">
           <img
-            className="w-20 h-20"
+            className="w-14 lg:w-20 h-14 lg:h-20"
             src={`${process.env.REACT_APP_LOGO_IMAGE}/logo-no-background.png`}
             alt=""
           />
-          <h1 className=" text-5xl font-extrabold">ENT</h1>
+          <h1 className=" text-3xl lg:text-5xl font-extrabold">ENT</h1>
         </div>
-        <div className="text-gray-400 h-3/4 flex flex-wrap items-center justify-center w-full text-start py-20 text-3xl">
+        <div className="text-gray-400 h-3/4 flex flex-wrap items-center justify-center w-full text-start py-20 text-xl lg:text-3xl">
           <div className="h-fit capitalize font-extralight">
             <p className="w-full">welcome to vent.</p>
             <p className="w-full">
@@ -174,11 +178,10 @@ const LoginForm: React.FC = () => {
               <input
                 type="text"
                 id="userName"
-                autoFocus
                 autoComplete="off"
                 aria-label="User name"
                 placeholder="Email or Telephone*"
-                className="w-full outline-none rounded-lg py-1"
+                className="w-full outline-none rounded-lg py-2"
                 value={loginDetails.userName}
                 onChange={handleChange}
               />
@@ -196,7 +199,7 @@ const LoginForm: React.FC = () => {
                 autoComplete="false"
                 aria-label="Password"
                 placeholder="Password*"
-                className="w-full outline-none rounded-lg py-1"
+                className="w-full outline-none rounded-lg py-2"
                 value={loginDetails.userPassword}
                 onChange={handleChange}
               />
@@ -232,7 +235,7 @@ const LoginForm: React.FC = () => {
             Have no account?{" "}
             <Link
               to="/sign-up"
-              className="text-sm text-blue-500 lg:hover:text-blue-300"
+              className="text-lg text-blue-500 lg:hover:text-blue-300"
             >
               Sign up
             </Link>

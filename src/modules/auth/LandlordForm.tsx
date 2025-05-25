@@ -12,6 +12,8 @@ import {
 import { LandlordCreationModel } from "./landlordModel";
 import AlertMessage from "../../other/alertMessage";
 
+import countryList from "../../global/data/countriesList.json";
+
 interface Props {
   landlord: LandlordCreationModel;
   setLandlord: React.Dispatch<React.SetStateAction<LandlordCreationModel>>;
@@ -144,10 +146,10 @@ const LandlordForm: React.FC<Props> = ({ landlord, setLandlord }) => {
           <small className="w-full"></small>
         </div>
 
-        {/* tenant's next of kin address */}
+        {/* landlord address */}
         <h1 className="text-lg font-bold pt-5 w-full">Address</h1>
 
-        {/* next of kin address type form input field */}
+        {/* landlord address type form input field */}
         <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
           <label htmlFor="addressType" className="w-full font-bold">
             Address type <span className="text-red-600">*</span>
@@ -171,15 +173,15 @@ const LandlordForm: React.FC<Props> = ({ landlord, setLandlord }) => {
           <small className="w-full"></small>
         </div>
 
-        {/* next of kin country form input field */}
+        {/* landlord country form input field */}
         <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
           <label htmlFor="country" className="w-full font-bold">
             Country <span className="text-red-600">*</span>
           </label>
-          <input
-            type="text"
+
+          <select
+            name="country"
             id="country"
-            placeholder="Enter next of kin country"
             className="w-full outline-none border border-gray-400 rounded-lg focus:border-blue-400"
             onChange={(e) =>
               setLandlord((prev) => ({
@@ -190,7 +192,12 @@ const LandlordForm: React.FC<Props> = ({ landlord, setLandlord }) => {
                 },
               }))
             }
-          />
+          >
+            <option value="">SELECT COUNTRY</option>
+            {countryList.map((country) => (
+              <option value={country.value}>{country.label}</option>
+            ))}
+          </select>
           <small className="w-full"></small>
         </div>
 

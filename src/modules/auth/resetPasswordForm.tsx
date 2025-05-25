@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { LoginModel } from "../users/models/loginModel";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../app/store";
@@ -138,7 +138,7 @@ const ResetPasswordForm: React.FC<Props> = ({ setIsForgotPassword }) => {
         {/* email or telephone form field */}
         <div className="form-group">
           <label htmlFor="userName" className="w-full text-white">
-            Email/Telephone<span className="text-red-600">*</span>
+            Email<span className="text-red-600">*</span>
           </label>
           <input
             type="text"
@@ -147,7 +147,7 @@ const ResetPasswordForm: React.FC<Props> = ({ setIsForgotPassword }) => {
             autoComplete="false"
             value={user.userName}
             placeholder="Enter email or Telephone*"
-            className="w-full outline-none rounded-lg"
+            className="w-full outline-none rounded-lg py-2"
             onChange={(e) => {
               handleChangeFormFieldEvent(e);
               markRequiredFormField(e.target);
@@ -170,7 +170,7 @@ const ResetPasswordForm: React.FC<Props> = ({ setIsForgotPassword }) => {
             autoComplete="false"
             value={user.userPassword}
             placeholder="Enter Password*"
-            className="w-full outline-none rounded-lg"
+            className="w-full outline-none rounded-lg py-2"
             onChange={(e) => {
               handleChangeFormFieldEvent(e);
               markRequiredFormField(e.target);
