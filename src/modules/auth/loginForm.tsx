@@ -155,7 +155,7 @@ const LoginForm: React.FC = () => {
           />
           <h1 className=" text-3xl lg:text-5xl font-extrabold">ENT</h1>
         </div>
-        <div className="text-gray-400 h-3/4 flex flex-wrap items-center justify-center w-full text-start py-20 text-xl lg:text-3xl">
+        <div className="text-gray-400 h-3/4 flex flex-wrap items-center justify-center w-full text-start py-10 lg:py-20 text-xl lg:text-3xl">
           <div className="h-fit capitalize font-extralight">
             <p className="w-full">welcome to vent.</p>
             <p className="w-full">
