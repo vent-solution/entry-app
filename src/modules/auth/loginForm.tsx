@@ -189,7 +189,7 @@ const LoginForm: React.FC = () => {
                 Email or telephone is required!
               </small>
             </div>
-            <div className="form-group relative py-2">
+            <div className="form-group relative py-0 lg:py-2">
               <label htmlFor="userPassword" className="w-full text-white">
                 Password <span className="text-red-500">*</span>
               </label>
