@@ -137,9 +137,6 @@ const LoginForm: React.FC = () => {
     }
   };
 
-  // if (isShowLandlordForm)
-  //   return <LandlordForm landlord={landlord} setLandlord={setLandlord} />;
-
   return (
     <form
       className="login-for p-2 lg:p-10 relative  flex flex-wrap justify-center items-center bg-blue-950 text-sm lg:h-svh min-h-svh"
