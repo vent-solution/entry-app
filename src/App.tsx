@@ -76,30 +76,30 @@ function App() {
   return (
     <>
       {/* Optional fallback button */}
-      {promptReady && deferredPrompt && (
-        <button
-          onClick={() => {
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then((choiceResult: any) => {
-              console.log("User choice:", choiceResult.outcome);
-              setDeferredPrompt(null);
-            });
-          }}
-          style={{
-            position: "fixed",
-            top: "1rem",
-            right: "1rem",
-            padding: "0.5rem 1rem",
-            zIndex: 999,
-            background: "#007bff",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-          }}
-        >
-          Install App
-        </button>
-      )}
+      {/* {promptReady && deferredPrompt && ( */}
+      <button
+        onClick={() => {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then((choiceResult: any) => {
+            console.log("User choice:", choiceResult.outcome);
+            setDeferredPrompt(null);
+          });
+        }}
+        style={{
+          position: "fixed",
+          top: "1rem",
+          right: "1rem",
+          padding: "0.5rem 1rem",
+          zIndex: 999,
+          background: "#007bff",
+          color: "#fff",
+          border: "none",
+          borderRadius: "5px",
+        }}
+      >
+        Install App
+      </button>
+      {/* )} */}
 
       <Routes>
         <Route path="/" element={<Layout />}>
