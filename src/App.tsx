@@ -87,12 +87,11 @@ function App() {
           }}
           style={{
             position: "fixed",
-            bottom: "1rem",
+            top: "1rem",
             right: "1rem",
             padding: "0.5rem 1rem",
             zIndex: 999,
-            background: "#000000",
-            // background: "#007bff",
+            background: "#007bff",
             color: "#fff",
             border: "none",
             borderRadius: "5px",
