@@ -12,49 +12,57 @@ import { getUserLocation } from "./global/api";
 function App() {
   const dispatch = useDispatch<AppDispatch>();
 
-  // PWA install prompt handling
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
-  const [showInstallButton, setShowInstallButton] = useState(false);
+  const [promptReady, setPromptReady] = useState(false);
 
   useEffect(() => {
-    const handler = (e: Event) => {
+    const handler = (e: any) => {
       e.preventDefault();
       setDeferredPrompt(e);
-      setShowInstallButton(true);
+
+      // Delay the visual indicator or trigger
+      setTimeout(() => {
+        setPromptReady(true); // show button or auto-trigger logic
+      }, 1000);
     };
 
-    window.addEventListener("beforeinstallprompt", handler as EventListener);
+    window.addEventListener("beforeinstallprompt", handler);
 
     return () => {
-      window.removeEventListener(
-        "beforeinstallprompt",
-        handler as EventListener
-      );
+      window.removeEventListener("beforeinstallprompt", handler);
     };
   }, []);
 
-  const handleInstallClick = () => {
-    if (deferredPrompt) {
+  // Optional: Automatically prompt on first tap
+  useEffect(() => {
+    if (!deferredPrompt || !promptReady) return;
+
+    const autoPrompt = () => {
       deferredPrompt.prompt();
       deferredPrompt.userChoice.then((choiceResult: any) => {
-        if (choiceResult.outcome === "accepted") {
-          console.log("User accepted the install prompt");
-        } else {
-          console.log("User dismissed the install prompt");
-        }
+        console.log("User choice:", choiceResult.outcome);
         setDeferredPrompt(null);
-        setShowInstallButton(false);
       });
-    }
-  };
+      cleanup();
+    };
 
-  // WebSocket connection and subscription
+    const cleanup = () => {
+      window.removeEventListener("click", autoPrompt);
+      window.removeEventListener("touchstart", autoPrompt);
+    };
+
+    window.addEventListener("click", autoPrompt, { once: true });
+    window.addEventListener("touchstart", autoPrompt, { once: true });
+
+    return cleanup;
+  }, [deferredPrompt, promptReady]);
+
+  // WebSocket connection
   useEffect(() => {
     webSocketService.connect();
     usersTopicSubscription();
 
     return () => {
-      console.log("Unsubscribing from WebSocket...");
       webSocketService.unsubscribe("/topic/users");
       webSocketService.disconnect();
     };
@@ -67,15 +75,26 @@ function App() {
 
   return (
     <>
-      {showInstallButton && (
+      {/* Optional fallback button */}
+      {promptReady && deferredPrompt && (
         <button
-          onClick={handleInstallClick}
+          onClick={() => {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult: any) => {
+              console.log("User choice:", choiceResult.outcome);
+              setDeferredPrompt(null);
+            });
+          }}
           style={{
             position: "fixed",
-            bottom: "1rem",
+            top: "1rem",
             right: "1rem",
             padding: "0.5rem 1rem",
             zIndex: 999,
+            background: "#007bff",
+            color: "#fff",
+            border: "none",
+            borderRadius: "5px",
           }}
         >
           Install App
