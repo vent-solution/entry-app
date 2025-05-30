@@ -320,7 +320,7 @@ const SignUpForm = () => {
 
   return (
     <form
-      className="login-for relative  flex flex-wrap justify-center items-start bg-blue-950 text-sm min-h-svh"
+      className=" relative  flex flex-wrap justify-center items-start bg-blue-950 text-sm min-h-svh"
       action=""
       onSubmit={(e: React.FormEvent) => e.preventDefault()}
     >
@@ -344,7 +344,7 @@ const SignUpForm = () => {
         <h1 className="text-xs w-full text-start">&copy; vent solutions</h1>
       </div>
 
-      <div className="h-fit lg:h-svh login-form-inner w-full lg:w-1/2 relative px-5 rounded-md  bg-blue-700 flex flex-wrap bg-opacity-10 shadow-sm pb-10">
+      <div className="h-fit lg:min-h-svh login-form-inner w-full lg:w-1/2 relative px-5 rounded-md  bg-blue-700 flex flex-wrap bg-opacity-10 shadow-sm pb-10">
         <div className="w-full p-5 flex justify-center items-center lg:sticky -top-32 bg-inherit">
           <h1 className="text-white text-2xl border-b-2 border-b-white w-full">
             Create a vent account{" "}
@@ -446,7 +446,8 @@ const SignUpForm = () => {
             {/* Telephone input field */}
             <div className="form-group py-2 w-full lg:w-1/2 px-5">
               <label htmlFor="userTelephone" className="w-full text-white">
-                Telephone <span className="text-red-500">*</span>
+                Telephone (Include country code eg. +190...){" "}
+                <span className="text-red-500">*</span>
               </label>
 
               <input

@@ -25,7 +25,16 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   // check if can save tenant details
-  const canSaveTenant = String(tenant.idType).trim().length > 0;
+  const canSaveTenant =
+    String(tenant.idType).trim().length > 0 &&
+    String(tenant.nationalId).trim().length > 0 &&
+    String(tenant.nextOfKin?.nokName).trim().length > 0 &&
+    String(tenant.nextOfKin?.nokIdType).trim().length > 0 &&
+    String(tenant.nextOfKin?.nokNationalId).trim().length > 0 &&
+    String(tenant.nextOfKin?.nokTelephone).trim().length > 0 &&
+    String(tenant.nextOfKin?.addressType).trim().length > 0 &&
+    String(tenant.nextOfKin?.address?.country).trim().length > 0 &&
+    String(tenant.nextOfKin?.address?.city).trim().length > 0;
 
   // handle change text field values
   const handleChangeTextFieldValues = (
@@ -39,20 +48,22 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
   const handleSaveTenantDetails = async () => {
     const idType = document.getElementById("idType") as HTMLInputElement;
     const NOKIdType = document.getElementById("nokIdType") as HTMLInputElement;
+
     const nationalId = document.getElementById(
       "nationalId"
     ) as HTMLInputElement;
     const NOKNationalId = document.getElementById(
       "nokNationalId"
     ) as HTMLInputElement;
+
     const addressType = document.getElementById(
       "addressType"
     ) as HTMLInputElement;
     const country = document.getElementById("country") as HTMLInputElement;
     const city = document.getElementById("city") as HTMLInputElement;
 
-    const NOKtelephone = document.getElementById(
-      "userTelephone"
+    const nokTelephone = document.getElementById(
+      "nokTelephone"
     ) as HTMLInputElement;
 
     const nokName = document.getElementById("fullName") as HTMLInputElement;
@@ -80,7 +91,7 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
         addressType,
         country,
         city,
-        NOKtelephone,
+        nokTelephone,
         NOKIdType,
         NOKNationalId,
         nokName,
@@ -242,19 +253,22 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
         {/* next of kin telephone form input field */}
         <div className="form-group py-2 w-full lg:w-1/2 px-5">
           <label htmlFor="userTelephone" className="w-full text-white">
-            Telephone <span className="text-red-500">*</span>
+            Telephone (Include country code eg. +234...){" "}
+            <span className="text-red-500">*</span>
           </label>
 
           <input
             type="text"
-            id="userTelephone"
+            id="nokTelephone"
             autoComplete="off"
             placeholder="Telephone* Eg. +23578348990"
             className="w-full outline-none rounded-lg bg-gray-100 py-2"
-            value={tenant.nextOfKin?.nokTelephone || ""}
-            onChange={(e) => {
-              handleChangeTextFieldValues(e);
-            }}
+            onChange={(e) =>
+              setTenant((prev) => ({
+                ...prev,
+                nextOfKin: { ...prev.nextOfKin, nokTelephone: e.target.value },
+              }))
+            }
           />
 
           <small className="w-full text-red-300">
@@ -587,7 +601,10 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
             type="submit"
             id="save-tenant"
             className="py-1 px-10 outline-none bg-blue-700 lg:hover:bg-blue-400 text-2xl text-white cursor-pointer"
-            onClick={handleSaveTenantDetails}
+            onClick={(e) => {
+              handleSaveTenantDetails();
+              e.preventDefault();
+            }}
           />
         </div>
       </div>

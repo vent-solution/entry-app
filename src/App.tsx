@@ -15,14 +15,15 @@ function App() {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [promptReady, setPromptReady] = useState(false);
 
+  // Handle beforeinstallprompt event
   useEffect(() => {
     const handler = (e: any) => {
       e.preventDefault();
       setDeferredPrompt(e);
 
-      // Delay the visual indicator or trigger
+      // Delay showing the install button
       setTimeout(() => {
-        setPromptReady(true); // show button or auto-trigger logic
+        setPromptReady(true);
       }, 1000);
     };
 
@@ -33,29 +34,13 @@ function App() {
     };
   }, []);
 
-  // Optional: Automatically prompt on first tap
+  // Handle app installation
   useEffect(() => {
-    if (!deferredPrompt || !promptReady) return;
-
-    const autoPrompt = () => {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult: any) => {
-        console.log("User choice:", choiceResult.outcome);
-        setDeferredPrompt(null);
-      });
-      cleanup();
-    };
-
-    const cleanup = () => {
-      window.removeEventListener("click", autoPrompt);
-      window.removeEventListener("touchstart", autoPrompt);
-    };
-
-    window.addEventListener("click", autoPrompt, { once: true });
-    window.addEventListener("touchstart", autoPrompt, { once: true });
-
-    return cleanup;
-  }, [deferredPrompt, promptReady]);
+    window.addEventListener("appinstalled", () => {
+      setDeferredPrompt(null);
+      setPromptReady(false);
+    });
+  }, []);
 
   // WebSocket connection
   useEffect(() => {
@@ -73,29 +58,9 @@ function App() {
     getUserLocation();
   }, []);
 
-  useEffect(() => {
-    window.addEventListener("appinstalled", () => {
-      setDeferredPrompt(null);
-      setPromptReady(false);
-    });
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (
-        deferredPrompt &&
-        !window.matchMedia("(display-mode: standalone)").matches
-      ) {
-        setPromptReady(true);
-      }
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, [deferredPrompt]);
-
   return (
     <>
-      {/* Optional fallback button */}
+      {/* Manual Install Button */}
       {promptReady && deferredPrompt && (
         <button
           onClick={() => {
@@ -103,9 +68,10 @@ function App() {
             deferredPrompt.userChoice.then((choiceResult: any) => {
               console.log("User choice:", choiceResult.outcome);
               setDeferredPrompt(null);
+              setPromptReady(false);
             });
           }}
-          className="install-btn"
+          className="install-btn fixed bottom-4 right-4 bg-blue-600 text-white px-4 py-2 rounded shadow-lg z-50 h-fit"
         >
           Install App
         </button>

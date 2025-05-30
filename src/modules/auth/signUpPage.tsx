@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import SignUpForm from "./signUpForm";
 
 interface Props {}
 
 const SignUpPage: React.FC<Props> = () => {
   return (
-    <div className="">
+    <div className="w-full">
       <SignUpForm />
     </div>
   );
