@@ -28,7 +28,7 @@ let AlertMessage: React.FC<Props> = () => {
 
   return (
     <div
-      className={`alert-overlay fixed top-0 left-0 right-0 bottom-0 flex items-center lg:items-start justify-center lg:justify-end ${
+      className={` bg-blue-950 bg-opacity-30 z-50 fixed top-0 left-0 right-0 bottom-0 flex items-center lg:items-start justify-center lg:justify-end ${
         !alertData.status === false ? "show" : "hidden"
       } `}
     >

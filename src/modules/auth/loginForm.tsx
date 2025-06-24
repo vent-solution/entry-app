@@ -35,7 +35,7 @@ const LoginForm: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
-    setLoginDetails({ ...loginDetails, [id]: value });
+    setLoginDetails({ ...loginDetails, [id]: value.trim() });
     markRequiredFormField(e.target);
   };
 
@@ -67,8 +67,8 @@ const LoginForm: React.FC = () => {
 
     // check if email or phone number is valid
     if (
-      !isValidEmail(loginDetails.userName) &&
-      !isValidTelephone(loginDetails.userName)
+      !isValidEmail(loginDetails.userName.trim()) &&
+      !isValidTelephone(loginDetails.userName.trim())
     ) {
       dispatch(
         setAlert({
@@ -91,7 +91,7 @@ const LoginForm: React.FC = () => {
         dispatch(
           setAlert({
             type: AlertTypeEnum.danger,
-            message: "ERROR OCCURRED PLEASE TRY AGAIN!!",
+            message: "Internal server error!",
             status: true,
           })
         );
@@ -109,7 +109,10 @@ const LoginForm: React.FC = () => {
           })
         );
       } else {
-        if (result.data.userRole === UserRoleEnum.landlord) {
+        if (
+          result.data.userRole === UserRoleEnum.landlord ||
+          result.data.userRole === UserRoleEnum.manager
+        ) {
           window.location.href = `${
             process.env.REACT_APP_LANDLORD_APP_URL + result.data.userId
           }`;
@@ -170,7 +173,7 @@ const LoginForm: React.FC = () => {
           <>
             <div className="form-group py-2">
               <label htmlFor="userName" className="w-full text-white">
-                Email<span className="text-red-500">*</span>
+                Email / Telephone<span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -182,7 +185,7 @@ const LoginForm: React.FC = () => {
                 value={loginDetails.userName}
                 onChange={handleChange}
               />
-              <small className="w-full text-red-200">
+              <small className="w-full text-red-600">
                 Email or telephone is required!
               </small>
             </div>
@@ -200,7 +203,7 @@ const LoginForm: React.FC = () => {
                 value={loginDetails.userPassword}
                 onChange={handleChange}
               />
-              <small className="w-full text-red-200 text-sm">
+              <small className="w-full text-red-600">
                 Password is required!
               </small>
               <div

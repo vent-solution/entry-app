@@ -29,12 +29,12 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
     String(tenant.idType).trim().length > 0 &&
     String(tenant.nationalId).trim().length > 0 &&
     String(tenant.nextOfKin?.nokName).trim().length > 0 &&
-    String(tenant.nextOfKin?.nokIdType).trim().length > 0 &&
-    String(tenant.nextOfKin?.nokNationalId).trim().length > 0 &&
-    String(tenant.nextOfKin?.nokTelephone).trim().length > 0 &&
-    String(tenant.nextOfKin?.addressType).trim().length > 0 &&
-    String(tenant.nextOfKin?.address?.country).trim().length > 0 &&
-    String(tenant.nextOfKin?.address?.city).trim().length > 0;
+    // String(tenant.nextOfKin?.nokIdType).trim().length > 0 &&
+    // String(tenant.nextOfKin?.nokNationalId).trim().length > 0 &&
+    String(tenant.nextOfKin?.nokTelephone).trim().length > 0;
+  // String(tenant.nextOfKin?.addressType).trim().length > 0 &&
+  // String(tenant.nextOfKin?.address?.country).trim().length > 0 &&
+  // String(tenant.nextOfKin?.address?.city).trim().length > 0;
 
   // handle change text field values
   const handleChangeTextFieldValues = (
@@ -74,13 +74,13 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
       tenant.idType.trim().length < 1 ||
       !tenant.nationalId ||
       tenant.nationalId.trim().length < 1 ||
-      !tenant.nextOfKin?.addressType ||
-      tenant.nextOfKin.addressType.trim().length < 1 ||
-      !tenant.nextOfKin.address?.country ||
-      tenant.nextOfKin.address?.country.trim().length < 1 ||
-      !tenant.nextOfKin.address?.city ||
-      tenant.nextOfKin.address?.city.trim().length < 1 ||
-      !tenant.nextOfKin.nokTelephone ||
+      // !tenant.nextOfKin?.addressType ||
+      // tenant.nextOfKin.addressType.trim().length < 1 ||
+      // !tenant.nextOfKin.address?.country ||
+      // tenant.nextOfKin.address?.country.trim().length < 1 ||
+      // !tenant.nextOfKin.address?.city ||
+      // tenant.nextOfKin.address?.city.trim().length < 1 ||
+      !tenant.nextOfKin?.nokTelephone ||
       tenant.nextOfKin.nokTelephone.trim().length < 1 ||
       !tenant.nextOfKin?.nokName ||
       tenant.nextOfKin.nokName.trim().length < 1
@@ -92,8 +92,8 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
         country,
         city,
         nokTelephone,
-        NOKIdType,
-        NOKNationalId,
+        // NOKIdType,
+        // NOKNationalId,
         nokName,
       ]);
     }
@@ -158,7 +158,7 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
         {/* company name form input field */}
         <div className="form-group w-full p-5  shadow-lg">
           <label htmlFor="companyName" className="w-full font-bold">
-            Company name <span className="text-red-600"></span>
+            Company name <span className="text-red-600">(optional)</span>
           </label>
           <input
             type="text"
@@ -277,7 +277,7 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
         </div>
 
         {/* next of kin ID form input field */}
-        <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
+        {/* <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
           <label htmlFor="nokNationalId" className="w-full font-bold">
             ID number <span className="text-red-600">*</span>
           </label>
@@ -296,10 +296,10 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
           <small className="w-full text-red-200">
             Next of kin ID number is required!
           </small>
-        </div>
+        </div> */}
 
         {/* next of kin national ID type form input field */}
-        <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
+        {/* <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
           <label htmlFor="nokIdType" className="w-full font-bold">
             ID type
             <span className="text-red-600">*</span>
@@ -323,13 +323,13 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
           <small className="w-full text-red-200">
             Next of kin ID type is required!
           </small>
-        </div>
+        </div> */}
 
         {/* tenant's next of kin address */}
-        <h1 className="text-lg font-bold pt-5 w-full">Next of kin address</h1>
+        {/* <h1 className="text-lg font-bold pt-5 w-full">Next of kin address</h1> */}
 
         {/* next of kin address type form input field */}
-        <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
+        {/* <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
           <label htmlFor="addressType" className="w-full font-bold">
             Address type <span className="text-red-600">*</span>
           </label>
@@ -352,10 +352,10 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
           <small className="w-full text-red-200">
             Address type is required!
           </small>
-        </div>
+        </div> */}
 
         {/* next of kin country form input field */}
-        <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
+        {/* <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
           <label htmlFor="country" className="w-full font-bold">
             Country <span className="text-red-600">*</span>
           </label>
@@ -383,10 +383,10 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
             ))}
           </select>
           <small className="w-full text-red-200">Country is required!</small>
-        </div>
+        </div> */}
 
         {/* next of kin state form input field */}
-        <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
+        {/* <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
           <label htmlFor="state" className="w-full font-bold">
             State <span className="text-red-600"></span>
           </label>
@@ -409,10 +409,10 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
             }
           />
           <small className="w-full"></small>
-        </div>
+        </div> */}
 
         {/* next of kin city form input field */}
-        <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
+        {/* <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
           <label htmlFor="city" className="w-full font-bold">
             City/Municipality/District <span className="text-red-600">*</span>
           </label>
@@ -437,10 +437,10 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
           <small className="w-full text-red-200">
             City/Municipality/District is required!
           </small>
-        </div>
+        </div> */}
 
         {/* next of kin county form input field */}
-        <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
+        {/* <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
           <label htmlFor="county" className="w-full font-bold">
             County <span className="text-red-600"></span>
           </label>
@@ -463,10 +463,10 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
             }
           />
           <small className="w-full"></small>
-        </div>
+        </div> */}
 
         {/* next of kin division form input field */}
-        <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
+        {/* <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
           <label htmlFor="division" className="w-full font-bold">
             Division / Sub county <span className="text-red-600"></span>
           </label>
@@ -489,10 +489,10 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
             }
           />
           <small className="w-full"></small>
-        </div>
+        </div> */}
 
         {/* next of kin parish form input field */}
-        <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
+        {/* <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
           <label htmlFor="parish" className="w-full font-bold">
             Parish / Ward <span className="text-red-600"></span>
           </label>
@@ -515,10 +515,10 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
             }
           />
           <small className="w-full"></small>
-        </div>
+        </div> */}
 
         {/* next of kin zone form input field */}
-        <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
+        {/* <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
           <label htmlFor="zone" className="w-full font-bold">
             Zone / Village / LC1 <span className="text-red-600"></span>
           </label>
@@ -541,10 +541,10 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
             }
           />
           <small className="w-full"></small>
-        </div>
+        </div> */}
 
         {/* next of kin street form input field */}
-        <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
+        {/* <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
           <label htmlFor="street" className="w-full font-bold">
             Street <span className="text-red-600"></span>
           </label>
@@ -567,10 +567,10 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
             }
           />
           <small className="w-full"></small>
-        </div>
+        </div> */}
 
         {/* next of kin plotNumber form input field */}
-        <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
+        {/* <div className="form-group w-full lg:w-1/2 p-5  shadow-lg">
           <label htmlFor="plotNumber" className="w-full font-bold">
             Plot Number <span className="text-red-600"></span>
           </label>
@@ -593,7 +593,7 @@ const TenantDetailsForm: React.FC<Props> = ({ tenant, setTenant }) => {
             }
           />
           <small className="w-full"></small>
-        </div>
+        </div> */}
 
         {/* button for saving tenant */}
         <div className="form-group w-full py-5 flex justify-center items-center">

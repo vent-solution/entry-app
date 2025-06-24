@@ -11,17 +11,17 @@
   font-family: "Poppins";
 }
 
-.install-btn {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  padding: 0.5rem 1rem;
-  z-index: 999;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
+// .install-btn {
+//   position: fixed;
+//   top: 1rem;
+//   right: 1rem;
+//   padding: 0.5rem 1rem;
+//   z-index: 999;
+//   background-color: #007bff;
+//   color: white;
+//   border: none;
+//   border-radius: 5px;
+// }
 
 input,
 select {
@@ -136,10 +136,10 @@ tr {
   }
 }
 
-.alert-overlay {
-  $varbg: rgb(23 37 84);
-  background-color: rgba($color: $varbg, $alpha: 0.2);
-}
+// .alert-overlay {
+//   $varbg: rgb(23 37 84);
+//   background-color: rgba($color: $varbg, $alpha: 0.2);
+// }
 
 .filter-form-overlay {
   $varbg: rgb(23 37 84);

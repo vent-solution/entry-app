@@ -52,20 +52,20 @@ const SignUpForm = () => {
 
     companyName: "",
 
-    idType: "",
-    nationalId: "",
+    // idType: "",
+    // nationalId: "",
 
     addressType: "",
     address: {
       country: "",
-      state: "",
+      // state: "",
       city: "",
-      county: "",
-      division: "",
-      parish: "",
-      zone: "",
-      street: "",
-      plotNumber: "",
+      // county: "",
+      // division: "",
+      // parish: "",
+      // zone: "",
+      // street: "",
+      // plotNumber: "",
     },
   });
 
@@ -83,20 +83,20 @@ const SignUpForm = () => {
       nokName: "",
       nokEmail: "",
       nokTelephone: "",
-      nokNationalId: "",
-      nokIdType: "",
-      addressType: "",
-      address: {
-        country: "",
-        state: "",
-        city: "",
-        county: "",
-        division: "",
-        parish: "",
-        zone: "",
-        street: "",
-        plotNumber: "",
-      },
+      // nokNationalId: "",
+      // nokIdType: "",
+      // addressType: "",
+      // address: {
+      //   country: "",
+      //   state: "",
+      //   city: "",
+      //   county: "",
+      //   division: "",
+      //   parish: "",
+      //   zone: "",
+      //   street: "",
+      //   plotNumber: "",
+      // },
     },
   });
 
@@ -344,7 +344,7 @@ const SignUpForm = () => {
         <h1 className="text-xs w-full text-start">&copy; vent solutions</h1>
       </div>
 
-      <div className="h-fit lg:min-h-svh login-form-inner w-full lg:w-1/2 relative px-5 rounded-md  bg-blue-700 flex flex-wrap bg-opacity-10 shadow-sm pb-10">
+      <div className="h-fit lg:min-h-svh login-form-inner w-full lg:w-1/2 relative px-1 lg:px-5 rounded-md  bg-blue-700 flex flex-wrap items-center bg-opacity-10 shadow-sm pb-10">
         <div className="w-full p-5 flex justify-center items-center lg:sticky -top-32 bg-inherit">
           <h1 className="text-white text-2xl border-b-2 border-b-white w-full">
             Create a vent account{" "}
@@ -410,7 +410,7 @@ const SignUpForm = () => {
             {/* Other names form field */}
             <div className="form-group py-2 w-full px-5">
               <label htmlFor="otherNames" className="w-full text-white">
-                Other names
+                Other names <span className="text-red-600">(optional)</span>
               </label>
               <input
                 type="text"

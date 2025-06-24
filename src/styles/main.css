@@ -8,18 +8,6 @@
   font-family: "Poppins";
 }
 
-.install-btn {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  padding: 0.5rem 1rem;
-  z-index: 999;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
 input,
 select {
   font-size: 15px;
@@ -106,10 +94,6 @@ tr:hover td.actions {
 .form-group.required textarea,
 .form-group.required select {
   border: 1px red solid;
-}
-
-.alert-overlay {
-  background-color: rgba(23, 37, 84, 0.2);
 }
 
 .filter-form-overlay {

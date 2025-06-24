@@ -4,10 +4,10 @@ import { UserModel } from "../users/models/userModel";
 export interface LandlordModel {
   landlordId?: number;
   companyName?: string;
-  idType?: string;
-  nationalId?: string;
-  addressType?: string;
-  address?: AddressModel;
+  // idType?: string;
+  // nationalId?: string;
+  // addressType?: string;
+  // address?: AddressModel;
   dateCreated?: string;
   lastUpdated?: string;
   user?: UserModel;
@@ -16,8 +16,8 @@ export interface LandlordModel {
 export interface LandlordCreationModel {
   landlordId?: number;
   companyName?: string;
-  idType?: string;
-  nationalId?: string;
+  // idType?: string;
+  // nationalId?: string;
   addressType?: string;
   address?: AddressModel;
   dateCreated?: string;
