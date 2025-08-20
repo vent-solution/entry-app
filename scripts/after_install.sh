@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /var/www/html/entry-app
+cd /usr/share/nginx/html
 
 ls -la
 

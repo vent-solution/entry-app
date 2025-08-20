@@ -11,7 +11,6 @@ export const store = configureStore({
     confirm: confirmReducer,
     action: actionReducer,
     settings: settingsReducer,
-
     currencyExchange: currencyExchangeReducer,
   },
 });

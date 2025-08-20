@@ -111,7 +111,8 @@ const LoginForm: React.FC = () => {
       } else {
         if (
           result.data.userRole === UserRoleEnum.landlord ||
-          result.data.userRole === UserRoleEnum.manager
+          result.data.userRole === UserRoleEnum.manager ||
+          result.data.userRole === UserRoleEnum.staff
         ) {
           window.location.href = `${
             process.env.REACT_APP_LANDLORD_APP_URL + result.data.userId
